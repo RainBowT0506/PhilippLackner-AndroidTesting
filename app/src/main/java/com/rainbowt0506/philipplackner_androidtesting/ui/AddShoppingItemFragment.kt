@@ -4,16 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.rainbowt0506.philipplackner_androidtesting.R
-import com.rainbowt0506.philipplackner_androidtesting.databinding.FragmentShoppingBinding
+import com.rainbowt0506.philipplackner_androidtesting.databinding.FragmentAddShoppingItemBinding
 
+class AddShoppingItemFragment : Fragment(R.layout.fragment_add_shopping_item) {
 
-class ShoppingFragment : Fragment(R.layout.fragment_shopping) {
-
-    private lateinit var binding: FragmentShoppingBinding
+    private lateinit var binding: FragmentAddShoppingItemBinding
     lateinit var viewModel: ShoppingViewModel
 
     override fun onCreateView(
@@ -21,7 +21,7 @@ class ShoppingFragment : Fragment(R.layout.fragment_shopping) {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentShoppingBinding.inflate(inflater, container, false)
+        binding = FragmentAddShoppingItemBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -29,10 +29,18 @@ class ShoppingFragment : Fragment(R.layout.fragment_shopping) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(requireActivity()).get(ShoppingViewModel::class.java)
 
-        binding.fabAddShoppingItem.setOnClickListener {
+        binding.ivShoppingImage.setOnClickListener {
             findNavController().navigate(
-                ShoppingFragmentDirections.actionShoppingFragmentToAddShoppingFragment()
+                AddShoppingItemFragmentDirections.actionAddShoppingFragmentToImagePickFragment()
             )
         }
+
+        val callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                viewModel.setCurImageUrl("")
+                findNavController().popBackStack()
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(callback)
     }
 }
