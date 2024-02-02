@@ -87,8 +87,6 @@ dependencies {
     //Dagger - Hilt
     implementation "com.google.dagger:hilt-android:2.48"
     kapt "com.google.dagger:hilt-android-compiler:2.48"
-    kaptAndroidTest "com.google.dagger:hilt-android-compiler:2.48"
-    androidTestImplementation "com.google.dagger:hilt-android-testing:2.48"
 
     // Timber
     implementation 'com.jakewharton.timber:timber:4.7.1'
@@ -112,4 +110,10 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     androidTestImplementation "org.mockito:mockito-core:2.28.2"
+    androidTestImplementation "com.google.dagger:hilt-android-testing:2.48"
+    kaptAndroidTest "com.google.dagger:hilt-android-compiler:2.48"
+    debugImplementation "androidx.fragment:fragment-testing:1.7.0-alpha09"
+    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.5.1'
+
+
 }
